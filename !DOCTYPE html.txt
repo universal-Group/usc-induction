@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Documentation Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            padding: 40px 0;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #6c757d, #495057);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+        }
+        
+        .card h2 {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 1.5rem;
+        }
+        
+        .card p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #6c757d, #495057);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(108, 117, 125, 0.4);
+        }
+        
+        .btn.secondary {
+            background: #f8f9fa;
+            color: #495057;
+            border: 2px solid #dee2e6;
+        }
+        
+        .btn.secondary:hover {
+            background: #dee2e6;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .interactive-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .interactive-section h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #6c757d;
+        }
+        
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .checkbox-item:hover {
+            background: #dee2e6;
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        
+        .progress-bar {
+            background: #dee2e6;
+            height: 8px;
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(135deg, #6c757d, #495057);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .status-message {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .status-warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            opacity: 0.8;
+            margin-top: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Employee Documentation Portal</h1>
+            <p>Complete your onboarding documents efficiently and securely</p>
+        </div>
+        
+        <div class="main-content">
+            <div class="card">
+                <div class="card-icon">📄</div>
+                <h2>View Full Documents</h2>
+                <ul>
+                    <li>
+                        <a href="Induction Pack UME portal.pdf" class="btn secondary" target="_blank">Download Induction Pack UME (PDF)</a>
+                    </li>
+                    <li>
+                        <a href="!DOCTYPE html" class="btn secondary" target="_blank">View HTML Document</a>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon">✍️</div>
+                <h2>Interactive Forms</h2>
+                <p>Complete the required interactive sections online. These forms will auto-populate and can be submitted digitally for faster processing.</p>
+                <button class="btn" onclick="showInteractiveForms()">Start Interactive Forms</button>
+            </div>
+        </div>
+        
+        <div id="interactiveForms" class="hidden">
+            <div class="interactive-section fade-in">
+                <h3>📋 Section 1: Employee Information</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+                
+                <form id="employeeForm">
+                    <div class="form-group">
+                        <label for="firstName">First Name *</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="lastName">Last Name *</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="department">Department</label>
+                        <select id="department" name="department">
+                            <option value="">Select Department</option>
+                            <option value="hr">Human Resources</option>
+                            <option value="it">Information Technology</option>
+                            <option value="finance">Finance</option>
+                            <option value="marketing">Marketing</option>
+                            <option value="operations">Operations</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="startDate">Start Date</label>
+                        <input type="date" id="startDate" name="startDate">
+                    </div>
+                    
+                    <button type="button" class="btn" onclick="nextSection()">Continue to Consents →</button>
+                </form>
+            </div>
+            
+            <div id="consentSection" class="interactive-section hidden">
+                <h3>✅ Section 2: Consents & Acknowledgments</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 50%"></div>
+                </div>
+                
+                <p style="margin-bottom: 20px; color: #666;">Please review and check all applicable consents:</p>
+                
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="photoConsent" name="consents" value="photo">
+                        <label for="photoConsent">I consent to photographs being used for company materials</label>
+                    </div>
+                    
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="emailConsent" name="consents" value="email">
+                        <label for="emailConsent">I consent to receiving company communications via email</label>
+                    </div>
+                    
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="dataConsent" name="consents" value="data">
+                        <label for="dataConsent">I acknowledge the data processing policy</label>
+                    </div>
+                    
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="handbookConsent" name="consents" value="handbook">
+                        <label for="handbookConsent">I have read and understand the employee handbook</label>
+                    </div>
+                    
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="policyConsent" name="consents" value="policy">
+                        <label for="policyConsent">I agree to comply with all company policies</label>
+                    </div>
+                    
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="safetyConsent" name="consents" value="safety">
+                        <label for="safetyConsent">I acknowledge workplace safety requirements</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="signature">Digital Signature (Type your full name) *</label>
+                    <input type="text" id="signature" name="signature" placeholder="Type your full legal name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="signatureDate">Date *</label>
+                    <input type="date" id="signatureDate" name="signatureDate" required>
+                </div>
+                
+                <button type="button" class="btn" onclick="submitForms()">Submit All Forms</button>
+                <button type="button" class="btn secondary" onclick="previousSection()" style="margin-top: 10px;">← Back to Employee Info</button>
+            </div>
+            
+            <div id="successMessage" class="status-message status-success hidden">
+                <h3>✅ Forms Submitted Successfully!</h3>
+                <p>Your information has been recorded. You will receive a confirmation email shortly.</p>
+                <button class="btn" onclick="generateCompletePDF()" style="margin-top: 15px;">Download Completed Forms</button>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2024 Company Name | Secure Document Processing | Contact HR: sam.westbrook@univeralcs.co.uk</p>
+        </div>
+    </div>
+
+    <script>
+        let currentSection = 0;
+        
+        function showInteractiveForms() {
+            document.getElementById('interactiveForms').classList.remove('hidden');
+            document.querySelector('.main-content').style.display = 'none';
+            updateProgress();
+        }
+        
+        function nextSection() {
+            // Validate current section
+            const form = document.getElementById('employeeForm');
+            const requiredFields = form.querySelectorAll('[required]');
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    field.style.borderColor = '#dc3545';
+                    isValid = false;
+                } else {
+                    field.style.borderColor = '#e9ecef';
+                }
+            });
+            
+            if (!isValid) {
+                showMessage('Please fill in all required fields', 'warning');
+                return;
+            }
+            
+            document.querySelector('.interactive-section').classList.add('hidden');
+            document.getElementById('consentSection').classList.remove('hidden');
+            document.getElementById('consentSection').classList.add('fade-in');
+            currentSection = 1;
+            updateProgress();
+        }
+        
+        function previousSection() {
+            document.getElementById('consentSection').classList.add('hidden');
+            document.querySelector('.interactive-section').classList.remove('hidden');
+            currentSection = 0;
+            updateProgress();
+        }
+        
+        function submitForms() {
+            // Validate signature and date
+            const signature = document.getElementById('signature').value.trim();
+            const signatureDate = document.getElementById('signatureDate').value;
+            
+            if (!signature || !signatureDate) {
+                showMessage('Please provide your digital signature and date', 'warning');
+                return;
+            }
+            
+            // Set today's date if not set
+            if (!signatureDate) {
+                document.getElementById('signatureDate').value = new Date().toISOString().split('T')[0];
+            }
+            
+            // Simulate form submission
+            setTimeout(() => {
+                document.getElementById('consentSection').classList.add('hidden');
+                document.getElementById('successMessage').classList.remove('hidden');
+                document.getElementById('successMessage').classList.add('fade-in');
+                currentSection = 2;
+                updateProgress();
+            }, 1000);
+        }
+        
+        function updateProgress() {
+            const progress = (currentSection / 2) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+        
+        function showMessage(message, type) {
+            const existingMessage = document.querySelector('.status-message:not(.hidden)');
+            if (existingMessage) existingMessage.remove();
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `status-message status-${type}`;
+            messageDiv.textContent = message;
+            
+            document.getElementById('consentSection').insertBefore(messageDiv, document.getElementById('consentSection').firstChild);
+            
+            setTimeout(() => messageDiv.remove(), 5000);
+        }
+        
+        function downloadPDF() {
+            // Simulate PDF download
+            alert('PDF download would start here.\n\nIn your implementation:\n1. Upload your 17-page PDF to GitHub\n2. Link to: https://yourusername.github.io/repository/your-document.pdf');
+        }
+        
+        function generateCompletePDF() {
+            // Collect all form data
+            const formData = {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                department: document.getElementById('department').value,
+                startDate: document.getElementById('startDate').value,
+                signature: document.getElementById('signature').value,
+                signatureDate: document.getElementById('signatureDate').value,
+                consents: Array.from(document.querySelectorAll('input[name="consents"]:checked')).map(cb => cb.value)
+            };
+            
+            // In a real implementation, this would generate a PDF with the form data
+            alert(`Completed forms would be generated as PDF.\n\nForm Data Collected:\n- Name: ${formData.firstName} ${formData.lastName}\n- Email: ${formData.email}\n- Department: ${formData.department}\n- Consents: ${formData.consents.length} items\n- Signed: ${formData.signature} on ${formData.signatureDate}`);
+        }
+        
+        // Set today's date as default
+        document.getElementById('signatureDate').value = new Date().toISOString().split('T')[0];
+        
+        // Auto-save functionality (optional)
+        const formInputs = document.querySelectorAll('input, select, textarea');
+        formInputs.forEach(input => {
+            input.addEventListener('change', () => {
+                localStorage.setItem('employeeForm_' + input.name, input.value);
+            });
+            
+            // Load saved data
+            const savedValue = localStorage.getItem('employeeForm_' + input.name);
+            if (savedValue) {
+                input.value = savedValue;
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96c02e15e3c56533',t:'MTc1NDY2ODMzNy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
