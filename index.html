@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UME Induction Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Fonts for a modern look -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400|Roboto:400,500" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #94c120;
+            --accent-blue: #093c59;
+            --bg-light: #f5f6fa;
+            --bg-white: #fff;
+            --text-black: #1a1a1a;
+            --text-grey: #636e72;
+            --card-grey: #e9ebef;
+            --shadow: 0 8px 32px rgba(44, 62, 80, 0.09);
+            --btn-grey: #d1d5db;
+            --btn-hover-grey: #e5e7eb;
+        }
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: var(--bg-light);
+            margin: 0;
+            color: var(--text-black);
+        }
+        .container {
+            max-width: 950px;
+            margin: 35px auto;
+            padding: 40px 32px;
+            background: var(--bg-white);
+            border-radius: 22px;
+            box-shadow: var(--shadow);
+        }
+        .hero {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+        .hero img {
+            width: 260px;
+            margin-bottom: 14px;
+            /* Removed drop shadow */
+            background: transparent;
+        }
+        .hero h1 {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 2.4rem;
+            margin-bottom: 10px;
+            color: var(--accent-blue);
+            letter-spacing: 1px;
+        }
+        .hero p {
+            color: var(--text-grey);
+            font-size: 1.14rem;
+            margin-bottom: 0;
+            font-weight: 500;
+        }
+        .cards {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .card {
+            background: var(--card-grey);
+            border-radius: 16px;
+            box-shadow: 0 2px 14px rgba(44,62,80,0.04);
+            padding: 28px 22px;
+            min-width: 260px;
+            max-width: 340px;
+            flex: 1 1 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 2px solid var(--bg-white);
+        }
+        .card:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 10px 28px rgba(44,62,80,0.18);
+            border-color: var(--primary-green);
+        }
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            color: var(--primary-green);
+        }
+        .card h2 {
+            text-align: center;
+            margin-bottom: 11px;
+            color: var(--accent-blue);
+            font-size: 1.25rem;
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: 700;
+        }
+        .card ul {
+            list-style: none;
+            padding-left: 0;
+            width: 100%;
+        }
+        .card ul li {
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        .btn {
+            display: inline-block;
+            width: 90%;
+            min-width: 120px;
+            max-width: 240px;
+            padding: 12px;
+            background: var(--btn-grey);
+            color: var(--text-black);
+            text-decoration: none;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 700;
+            transition: background 0.2s, color 0.2s, transform 0.2s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 0 2px 8px rgba(44,62,80,0.09);
+            letter-spacing: 1px;
+            margin: 0 auto;
+        }
+        .btn:hover {
+            background: var(--btn-hover-grey);
+            color: var(--text-black);
+            transform: scale(0.97);
+            box-shadow: 0 4px 12px rgba(44,62,80,0.10);
+        }
+        .btn.secondary {
+            background: #cfd8dc;
+            color: var(--text-black);
+        }
+        .btn.secondary:hover {
+            background: var(--btn-hover-grey);
+            color: var(--text-black);
+        }
+        .contact-section {
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 14px;
+            padding: 20px 0;
+            border-top: 1px solid #d8dbdf;
+            font-size: 1.05rem;
+        }
+        .hr-contacts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            justify-content: center;
+            margin-top: 8px;
+        }
+        .contact-card {
+            display: flex;
+            align-items: center;
+            background: var(--card-grey);
+            border-radius: 14px;
+            padding: 10px 18px;
+            box-shadow: 0 2px 8px rgba(44,62,80,0.04);
+        }
+        .contact-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            margin-right: 12px;
+            background: var(--primary-green);
+            display: inline-block;
+            object-fit: cover;
+            border: 2px solid var(--accent-blue);
+        }
+        .footer {
+            text-align: center;
+            color: var(--accent-blue);
+            opacity: 0.95;
+            margin-top: 32px;
+            font-size: 1rem;
+            padding-bottom: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        @media (max-width: 800px) {
+            .container {padding: 18px;}
+            .cards {flex-direction: column; gap: 20px;}
+        }
+        @media (max-width: 500px) {
+            .hero img {width: 80%;}
+            .container {padding: 6px;}
+            .btn {width: 100%; max-width: 100%;}
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero">
+            <img src="ume-logo.gif" alt="Universal Mechanical & Electrical Logo">
+            <h1>UME Induction Portal</h1>
+            <p>Your gateway for secure and easy onboarding</p>
+        </div>
+        <div class="cards">
+            <div class="card">
+                <div class="card-icon">📄</div>
+                <h2>Download Documents</h2>
+                <ul>
+                    <li>
+                        <a href="Induction Pack UME portal.pdf" class="btn secondary" target="_blank" rel="noopener">Download Induction Pack (PDF)</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">✍️</div>
+                <h2>Complete Forms Online</h2>
+                <ul>
+                    <li>
+                        <a href="https://form.jotform.com/250623432868056" class="btn" target="_blank" rel="noopener">Marketing Photography Consent</a>
+                    </li>
+                    <li>
+                        <a href="https://form.jotform.com/252192402561349" class="btn" target="_blank" rel="noopener">Induction Checklist</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="contact-section">
+            <strong style="color: var(--accent-blue); font-weight: 700;">Contact HR:</strong>
+            <div class="hr-contacts">
+                <div class="contact-card">
+                    <img src="https://ui-avatars.com/api/?name=Sam+Westbrook&background=94c120&color=fff&size=64" class="contact-avatar" alt="Sam Westbrook">
+                    <span><strong style="color: var(--accent-blue);">Sam Westbrook</strong><br><a href="mailto:sam.westbrook@univeralcs.co.uk" style="color: var(--primary-green); font-weight:500;">sam.westbrook@univeralcs.co.uk</a></span>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            © 2025 Universal Mechanical & Electrical | Secure Document Processing
+        </div>
+    </div>
+</body>
+</html>
